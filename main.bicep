@@ -22,5 +22,19 @@ resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
   })
 }
 
+
+module serviceBus 'modules/service-bus.bicep' = {
+  name: 'serviceBusDeploy'
+  scope: rg
+  params: {
+    workload: workload
+    location: location
+    env: env
+  }
+}
+
 output resourceGroupName string = rg.name
 output resourceGroupId string = rg.id
+output serviceBusNamespace string = serviceBus.outputs.serviceBusNamespace
+output fileProcessingQueueRequest string = serviceBus.outputs.fileProcessingQueueRequest
+output fileProcessingQueueResponse string = serviceBus.outputs.fileProcessingQueueResponse
