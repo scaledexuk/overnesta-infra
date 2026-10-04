@@ -26,7 +26,3 @@ resource fileProcessingQueueResponse 'Microsoft.ServiceBus/namespaces/queues@202
   parent: sbNamespace
   name: 'file-processing-response'
 }
-
- output serviceBusNamespace string = sbNamespace.name
- output fileProcessingQueueRequest string = fileProcessingQueueRequest.name
- output fileProcessingQueueResponse string = fileProcessingQueueResponse.name

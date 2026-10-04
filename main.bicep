@@ -33,8 +33,14 @@ module serviceBus 'modules/service-bus.bicep' = {
   }
 }
 
-output resourceGroupName string = rg.name
-output resourceGroupId string = rg.id
-output serviceBusNamespace string = serviceBus.outputs.serviceBusNamespace
-output fileProcessingQueueRequest string = serviceBus.outputs.fileProcessingQueueRequest
-output fileProcessingQueueResponse string = serviceBus.outputs.fileProcessingQueueResponse
+module staticApp 'modules/static-app.bicep' = {
+  name: 'staticAppDeploy'
+  scope: rg
+  params: {
+    workload: workload
+    env: env
+  }
+}
+
+
+
