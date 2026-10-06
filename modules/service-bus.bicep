@@ -6,7 +6,7 @@ param workload string
 @allowed(['dev', 'test', 'prod'])
 param env string
 
-var sbName = 'sb-${workload}-${env}'
+var sbName = 'sbn-${workload}-${env}'
 
 resource sbNamespace 'Microsoft.ServiceBus/namespaces@2026-01-01' = {
   name: sbName
@@ -19,10 +19,10 @@ resource sbNamespace 'Microsoft.ServiceBus/namespaces@2026-01-01' = {
 
 resource fileProcessingQueueRequest 'Microsoft.ServiceBus/namespaces/queues@2026-01-01' = {
   parent: sbNamespace
-  name: 'file-processing-request'
+  name: 'sbq-file-processing-request'
 }
 
 resource fileProcessingQueueResponse 'Microsoft.ServiceBus/namespaces/queues@2026-01-01' = {
   parent: sbNamespace
-  name: 'file-processing-response'
+  name: 'sbq-file-processing-response'
 }

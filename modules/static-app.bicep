@@ -5,7 +5,7 @@ param workload string
 @allowed(['dev', 'test', 'prod'])
 param env string
 
-var staticAppName = 'static-app-${workload}-${env}'
+var staticAppName = 'stapp-${workload}-${env}'
 
 resource staticSite 'Microsoft.Web/staticSites@2021-02-01' = {
   name: staticAppName
@@ -18,7 +18,7 @@ resource staticSite 'Microsoft.Web/staticSites@2021-02-01' = {
 }
 
 resource rentalManagerSite 'Microsoft.Web/staticSites@2021-02-01' = {
-  name: 'static-app-rental-manager-${env}'
+  name: 'stapp-rental-manager-${env}'
   location: location
   sku: {
     name: 'Free'
