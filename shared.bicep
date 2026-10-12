@@ -32,3 +32,12 @@ module serviceBus 'modules/service-bus.bicep' = {
     env: env
   }
 }
+
+module containerAppsEnvironment 'modules/container-apps-environment.bicep' = {
+  name: 'containerAppsEnvironmentDeploy'
+  scope: rg
+  params: {
+    name: 'cae-${workload}-${env}'
+    logAnalyticsName: 'log-${workload}-${env}'
+  }
+}
