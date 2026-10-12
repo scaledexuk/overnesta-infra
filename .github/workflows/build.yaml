@@ -16,5 +16,5 @@ jobs:
         uses: actions/checkout@v3
       - name: shared Bicep build
         run: az bicep build --file shared.bicep
-      - name: Bicep build
+      - name: Rental Manager Bicep build
         run: az bicep build --file rentalmgr.bicep
