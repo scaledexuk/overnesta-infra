@@ -42,5 +42,15 @@ module staticApp 'modules/static-app.bicep' = {
   }
 }
 
+module containerApp 'modules/container-apps.bicep' = {
+  name: 'containerAppDeploy'
+  scope: rg
+  params: {
+    workload: workload
+    env: env
+    location: location
+  }
+}
+
 
 
