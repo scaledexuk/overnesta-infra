@@ -17,12 +17,3 @@ resource staticSite 'Microsoft.Web/staticSites@2021-02-01' = {
   properties: {}
 }
 
-resource rentalManagerSite 'Microsoft.Web/staticSites@2021-02-01' = {
-  name: 'stapp-rental-manager-${env}'
-  location: location
-  sku: {
-    name: 'Free'
-    tier: 'Free'
-  }
-  properties: {}
-}

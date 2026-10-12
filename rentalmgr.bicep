@@ -1,6 +1,6 @@
 targetScope = 'subscription'
 
-@description('Short workload name, e.g. overnesta')
+@description('Short workload name, e.g. rentalmgr')
 param workload string
 
 @allowed(['dev', 'test', 'prod'])
@@ -8,29 +8,21 @@ param env string
 
 param location string = 'uksouth'
 
+@description('Tags')
 param tags object = {}
 
 var rgName = 'rg-${workload}-${env}-${location}'
 
+var allTags = union(tags, {
+  workload: workload
+  env: env
+  managedBy: 'bicep'
+})
+
 resource rg 'Microsoft.Resources/resourceGroups@2024-03-01' = {
   name: rgName
   location: location
-  tags: union(tags, {
-    workload: workload
-    env: env
-    managedBy: 'bicep'
-  })
-}
-
-
-module serviceBus 'modules/service-bus.bicep' = {
-  name: 'serviceBusDeploy'
-  scope: rg
-  params: {
-    workload: workload
-    location: location
-    env: env
-  }
+  tags: allTags
 }
 
 module staticApp 'modules/static-app.bicep' = {
@@ -42,13 +34,19 @@ module staticApp 'modules/static-app.bicep' = {
   }
 }
 
+resource sharedEnvironment 'Microsoft.App/managedEnvironments@2026-07-01' existing = {
+  name: 'cae-overnesta-${env}'
+  scope: resourceGroup('rg-overnesta-${env}-${location}')
+}
+
 module containerApp 'modules/container-apps.bicep' = {
   name: 'containerAppDeploy'
   scope: rg
   params: {
-    workload: workload
-    env: env
+    name: 'ca-${workload}-${env}'
     location: location
+    environmentId: sharedEnvironment.id
+    tags: allTags
   }
 }
 
