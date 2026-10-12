@@ -14,5 +14,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: shared Bicep build
+        run: az bicep build --file shared.bicep
       - name: Bicep build
-        run: az bicep build --file main.bicep
+        run: az bicep build --file rentalmgr.bicep
