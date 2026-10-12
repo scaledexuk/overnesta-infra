@@ -1,10 +1,8 @@
-
 @description('Container App name, max 32 chars, e.g. ca-overnesta-checkin-dev')
 @maxLength(32)
 param name string
 
 param location string = resourceGroup().location
-
 
 param tags object = {}
 
@@ -17,22 +15,21 @@ param targetPort int = 80
 @description('Image to run. Public placeholder until your own image is pushed.')
 param image string = 'mcr.microsoft.com/k8se/quickstart:latest'
 
-
 resource containerApp 'Microsoft.App/containerApps@2026-07-01' = {
   name: name
   location: location
   tags: tags
-  
+
   properties: {
     managedEnvironmentId: environmentId
     configuration: {
-        ingress:{
-          external:true
-          targetPort: targetPort
-        }
+      ingress: {
+        external: true
+        targetPort: targetPort
+      }
     }
-    template:{
-      containers:[
+    template: {
+      containers: [
         {
           name: 'app'
           image: image
@@ -42,9 +39,9 @@ resource containerApp 'Microsoft.App/containerApps@2026-07-01' = {
           }
         }
       ]
-      scale:{
+      scale: {
         minReplicas: 0
-        maxReplicas:1
+        maxReplicas: 1
       }
     }
   }

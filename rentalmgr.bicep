@@ -49,6 +49,3 @@ module containerApp 'modules/container-apps.bicep' = {
     tags: allTags
   }
 }
-
-
-
