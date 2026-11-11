@@ -18,3 +18,5 @@ jobs:
         run: az bicep build --file shared.bicep
       - name: Rental Manager Bicep build
         run: az bicep build --file rentalmgr.bicep
+      - name: Overnesta Bicep build
+        run: az bicep build --file overnesta.bicep
