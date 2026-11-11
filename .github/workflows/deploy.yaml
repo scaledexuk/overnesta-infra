@@ -34,3 +34,10 @@ jobs:
           --name rentalmgr-${{ github.run_number }}
           --location uksouth
           --parameters rentalmgr.bicepparam
+
+      - name: Deploy Overnesta
+        run: >
+          az deployment sub create
+          --name overnesta-${{ github.run_number }}
+          --location uksouth
+          --parameters overnesta.bicepparam
