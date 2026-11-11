@@ -1,6 +1,6 @@
 using './rentalmgr.bicep'
 
-param workload = 'overnesta-rentalmgr'
+param workload = 'rentalmgr'
 
 param env = 'dev'
 param location = 'uksouth'

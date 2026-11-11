@@ -16,13 +16,3 @@ resource staticSite 'Microsoft.Web/staticSites@2021-02-01' = {
   }
   properties: {}
 }
-
-resource rentalManagerSite 'Microsoft.Web/staticSites@2025-03-01' = {
-  name: 'rental-manager-api'
-  location: location
-  sku: {
-    name: 'Free'
-    tier: 'Free'
-  }
-  properties: {}
-}
